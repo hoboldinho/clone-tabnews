@@ -25,8 +25,4 @@ function Home() {
   return body;
 }
 
-function name(params) {
-  const manteiga = "";
-}
-
 export default Home;
