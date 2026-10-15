@@ -29,7 +29,7 @@ async function clearDatabase() {
 }
 
 async function runPendingMigrations() {
-  await migrator.runPenddingMigrations();
+  await migrator.runPendingMigrations();
 }
 
 async function createUser(userObject) {
