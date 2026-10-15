@@ -10,7 +10,7 @@ const defautMigrationOption = {
   migrationsTable: "pgmigrations",
 };
 
-async function listPenddingMigrations() {
+async function listPendingMigrations() {
   let dbClient;
 
   try {
@@ -26,7 +26,7 @@ async function listPenddingMigrations() {
   }
 }
 
-async function runPenddingMigrations() {
+async function runPendingMigrations() {
   let dbClient;
 
   try {
@@ -45,8 +45,8 @@ async function runPenddingMigrations() {
 }
 
 const migrator = {
-  listPenddingMigrations,
-  runPenddingMigrations,
+  listPendingMigrations,
+  runPendingMigrations,
 };
 
 export default migrator;
