@@ -5,12 +5,12 @@ import { NotFoundError } from "infra/errors.js";
 
 const EXPIRATION_IN_MILLISECONDS = 60 * 15 * 1000; // 15 minutes
 
-async function findOneByUserId(userId) {
-  const userFound = await runSelectQuery(userId);
+async function findOneValidById(tokenId) {
+  const activationTokenObject = await runSelectQuery(tokenId);
 
-  return userFound;
+  return activationTokenObject;
 
-  async function runSelectQuery(userId) {
+  async function runSelectQuery(tokenId) {
     const results = await database.query({
       text: `
         SELECT
@@ -18,17 +18,20 @@ async function findOneByUserId(userId) {
         FROM
           user_activation_tokens
         WHERE
-          user_id = $1
+          id = $1
+          AND expires_at > NOW()
+          AND used_at IS NULL
         LIMIT
           1
         ;`,
-      values: [userId],
+      values: [tokenId],
     });
 
     if (results.rowCount === 0) {
       throw new NotFoundError({
-        message: "O userId informado não foi encontrado no sistema.",
-        action: "Verifique se o userId está digitado corretamente.",
+        message:
+          "O token de ativação utilizado não foi encontrado no sistema ou expirou.",
+        action: "Faça um novo cadastro.",
       });
     }
 
@@ -73,7 +76,7 @@ Equipe Fintab`,
 }
 
 const activation = {
-  findOneByUserId,
+  findOneValidById,
   create,
   sendActivationMail,
 };
