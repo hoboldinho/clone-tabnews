@@ -108,15 +108,15 @@ async function activateUserByUserId(userId) {
 
 async function sendEmailToUser(user, activationToken) {
   await email.send({
-    from: "FinTab <contato@fintab.com.br>",
+    from: "Hoboldinho <hoboldinho@hoboldinho.com.br>",
     to: user.email,
     subject: "Ativação de Conta",
-    text: `${user.username}, clique no link abaixo para ativar seu cadastro no FinTab:
+    text: `${user.username}, clique no link abaixo para ativar seu cadastro no Hoboldinho:
 
 ${webserver.origin}/cadastro/ativar/${activationToken.id}
 
 Atenciosamente,
-Equipe FinTab`,
+Equipe Hoboldinho`,
   });
 }
 
