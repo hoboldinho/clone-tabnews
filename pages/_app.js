@@ -1,7 +1,12 @@
-import "../styles/globals.css";
+import "@primer/primitives/dist/css/functional/themes/light.css";
+import { BaseStyles, ThemeProvider } from "@primer/react";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+export default function App({ Component, pageProps }) {
+  return (
+    <ThemeProvider>
+      <BaseStyles>
+        <Component {...pageProps} />
+      </BaseStyles>
+    </ThemeProvider>
+  );
 }
-
-export default MyApp;
